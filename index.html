@@ -20,21 +20,58 @@ html, body {
 	width: 100%;
 	height: 100%;
 	color: #2D2D2D;
+	text-shadow: 0 0 1px #2D2D2D;
+	background: floralwhite  ;
 }
 
 a {
 	text-decoration: none;
 	color: #2D2D2D;
+	display: inline-block;
+	position: relative;
 }
 
 a:hover {
 	text-decoration: underline;
+}
+
+.tips {
+	position: absolute;
+	width: 200px;
+	margin-left: 50%;
+	left: -100px;
+	top: 30px;
+	display: none;
+}
+
+.tips_top {
+	border-bottom: 10px solid #2D2D2D;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	margin: 0 90px;
+}
+
+.tips_body {
+	background: #2D2D2D;
+	color: white;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+a:hover .tips {
+	display: block;
 }
 </style>
 </head>
 <body style="position: absolute; font-family: Muli;">
 <div style="position: relative; top: 35%; width: 600px; margin: 0 auto;">
 <div style="position: absolute; top: -80px; width: 80px; height: 80px;">
+<div id="st" style="position: absolute; width: 10px; height: 10px; background: red; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; box-shadow:0 0 5px white; z-index: 1;"></div>
 <div style="position: absolute; width: 20px; height: 50px; left: 0; top: 0;">
 <div style="position: absolute; width: 13px; height: 30px; left: 3px; top: 10px; overflow: hidden">
 <div style="position: absolute; width: 20px; height: 20px; left: 4px; top: -1px; border: #2D2D2D 6px solid; -webkit-border-radius: 16px; -moz-border-radius: 16px; border-radius: 16px;"></div>
@@ -53,8 +90,28 @@ a:hover {
 </div>
 <div style="position: absolute; top: -76px; left: 120px; height: 72px; line-height: 36px; font-size: 36px;">Open Distributed System of Real-Time Communications</div>
 <div style="position: absolute; top: 60px; width: 100%; font-size: 20px; height: 20px; line-height: 20px; text-align: center;">
-<a style="margin-right: 100px;" href="#">How It Works</a><a style="margin-right: 100px;" href="#">Development</a><a href="#">Resources</a>
+<a style="margin-right: 100px;" href="#">How It Works<div class="tips"><div class="tips_top"></div><div class="tips_body">General Overview &amp; Protocol</div></div></a><a style="margin-right: 100px;" href="#">Development<div class="tips"><div class="tips_top"></div><div class="tips_body">Documents &amp; Communities</div></div></a><a href="#">Resources<div class="tips"><div class="tips_top"></div><div class="tips_body">Servers &amp; Clients</div></div></a>
 </div>
 </div>
+<script>
+function ty(el, r, ro, a, b, ox, oy, s, w, h){
+	r %= 360;
+	r += s*(Math.abs((r+90))%180/180*0.5+0.5);
+	t = r%360;
+	t = t/180*Math.PI;
+	o = ro/180*Math.PI;
+	var x = a*Math.cos(t)*Math.cos(o)-b*Math.sin(t)*Math.sin(o)+ox,
+	y = a*Math.cos(t)*Math.sin(o)+b*Math.sin(t)*Math.cos(o)+oy;
+	el.style.left = x+'px';
+	el.style.top = y+'px';
+	el.style.width = w*(Math.abs(r-180)/180*0.5+0.5)+'px';
+	el.style.height = h*(Math.abs(r-180)/180*0.5+0.5)+'px';
+	el.style.zIndex = Math.round(Math.abs(r-180)/180);
+	setTimeout(function(){ty(el, r, ro, a, b, ox, oy, s, w, h)}, 15);
+}
+
+var st = document.getElementById('st');
+ty(st, 0, 60, 10, 60, 40, 40, 2, 10, 10);
+</script>
 </body>
 </html>
