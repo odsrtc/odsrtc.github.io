@@ -66,10 +66,22 @@ a:hover {
 a:hover .tips {
 	display: block;
 }
+
+#mc {
+	opacity: 0;
+	-webkit-transition: opacity 1s ease-in-out;
+	-moz-transition: opacity 1s ease-in-out;
+	-o-transition: opacity 1s ease-in-out;
+	transition: opacity 1s ease-in-out;
+}
+
+#mc[loaded="true"] {
+	opacity: 1;
+}
 </style>
 </head>
 <body style="position: absolute; font-family: Muli;">
-<div style="position: relative; top: 35%; width: 600px; margin: 0 auto;">
+<div id="mc" style="position: relative; top: 35%; width: 600px; margin: 0 auto;">
 <div style="position: absolute; top: -80px; width: 80px; height: 80px;">
 <div id="st" style="position: absolute; width: 10px; height: 10px; background: red; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; box-shadow:0 0 5px white; z-index: 1;"></div>
 <div style="position: absolute; width: 20px; height: 50px; left: 0; top: 0;">
@@ -112,6 +124,10 @@ function ty(el, r, ro, a, b, ox, oy, s, w, h){
 
 var st = document.getElementById('st');
 ty(st, 0, 60, 10, 60, 40, 40, 2, 10, 10);
+
+window.onload = function(){
+	document.getElementById('mc').setAttribute('loaded', 'true');
+}
 </script>
 </body>
 </html>
